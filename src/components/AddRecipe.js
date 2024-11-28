@@ -1,5 +1,7 @@
 import React, { useState } from 'react';
 import axios from 'axios';
+axios.defaults.baseURL = 'http://localhost:5000/api';
+
 
 const AddRecipe = () => {
   const [title, setTitle] = useState('');
@@ -8,19 +10,26 @@ const AddRecipe = () => {
   const [category, setCategory] = useState('');
 
   const handleSubmit = async (e) => {
-    e.preventDefault();
+    e.preventDefault(); 
     const token = localStorage.getItem('token');
     try {
-      await axios.post(
+      const res = await axios.post(
         'http://localhost:5000/api/recipes',
-        { title, ingredients: ingredients.split(','), instructions, category },
+        {
+          title,
+          ingredients: ingredients.split(','),
+          instructions,
+          category,
+        },
         { headers: { Authorization: `Bearer ${token}` } }
       );
       alert('Recipe added successfully!');
     } catch (err) {
+      console.error(err); // Logs any error to the console
       alert('Failed to add recipe.');
     }
   };
+  
 
   return (
     <div className="col-md-6 mx-auto">

@@ -6,8 +6,12 @@ const Recipes = () => {
 
   useEffect(() => {
     const fetchRecipes = async () => {
+        try{
       const res = await axios.get('http://localhost:5000/api/recipes');
       setRecipes(res.data);
+        } catch (error) {
+            console.error('Error fetching products:', error);
+        }
     };
     fetchRecipes();
   }, []);

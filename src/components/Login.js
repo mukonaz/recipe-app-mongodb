@@ -4,21 +4,26 @@ import axios from 'axios';
 const Login = () => {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
-  const [error, setError] = useState('');
+  const [message, setMessage] = useState('');
 
   const handleLogin = async (e) => {
     e.preventDefault();
     try {
-      const res = await axios.post('http://localhost:5000/api/auth/login', { email, password });
-      localStorage.setItem('token', res.data.token);
-      alert('Login successful!');
+      const res = await axios.post('http://localhost:5000/api/auth/login', {
+        email,
+        password,
+      });
+      const { token } = res.data;
+      localStorage.setItem('token', token); // Store token in localStorage
+      setMessage('Login successful!');
     } catch (err) {
-      setError('Invalid email or password.');
+      console.error(err);
+      setMessage(err.response?.data?.msg || 'Login failed.');
     }
   };
 
   return (
-    <div className="col-md-6 mx-auto">
+    <div className="container">
       <h2>Login</h2>
       <form onSubmit={handleLogin}>
         <div className="mb-3">
@@ -41,9 +46,9 @@ const Login = () => {
             required
           />
         </div>
-        {error && <p className="text-danger">{error}</p>}
         <button type="submit" className="btn btn-primary">Login</button>
       </form>
+      {message && <p>{message}</p>}
     </div>
   );
 };

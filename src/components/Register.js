@@ -4,20 +4,26 @@ import axios from 'axios';
 const Register = () => {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
-  const [success, setSuccess] = useState('');
+  const [message, setMessage] = useState('');
 
   const handleRegister = async (e) => {
     e.preventDefault();
     try {
-      await axios.post('http://localhost:5000/api/auth/register', { email, password });
-      setSuccess('Registration successful! Please log in.');
+      const res = await axios.post('http://localhost:5000/api/auth/register', {
+        email,
+        password,
+      });
+      setMessage('Registration successful! You can now log in.');
+      setEmail('');
+      setPassword('');
     } catch (err) {
-      setSuccess('Failed to register.');
+      console.error(err);
+      setMessage(err.response?.data?.msg || 'Registration failed.');
     }
   };
 
   return (
-    <div className="col-md-6 mx-auto">
+    <div className="container">
       <h2>Register</h2>
       <form onSubmit={handleRegister}>
         <div className="mb-3">
@@ -40,9 +46,9 @@ const Register = () => {
             required
           />
         </div>
-        {success && <p className="text-success">{success}</p>}
         <button type="submit" className="btn btn-primary">Register</button>
       </form>
+      {message && <p>{message}</p>}
     </div>
   );
 };
