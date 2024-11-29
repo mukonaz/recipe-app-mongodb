@@ -1,10 +1,14 @@
-import React, { useState } from 'react';
+import React, { useState, useContext } from 'react';
+import { useNavigate } from 'react-router-dom';
 import axios from 'axios';
+import { AuthContext } from '../context/AuthContext';
 
 const Login = () => {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [message, setMessage] = useState('');
+  const { setIsAuthenticated } = useContext(AuthContext);
+  const navigate = useNavigate();
 
   const handleLogin = async (e) => {
     e.preventDefault();
@@ -14,8 +18,9 @@ const Login = () => {
         password,
       });
       const { token } = res.data;
-      localStorage.setItem('token', token); // Store token in localStorage
-      setMessage('Login successful!');
+      localStorage.setItem('token', token); // Store token
+      setIsAuthenticated(true); // Update authentication status
+      navigate('/recipes'); // Redirect to recipes
     } catch (err) {
       console.error(err);
       setMessage(err.response?.data?.msg || 'Login failed.');

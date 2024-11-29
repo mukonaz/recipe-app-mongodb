@@ -13,16 +13,24 @@ const App = () => {
       <Navbar />
       <div className="container mt-4">
         <Routes>
-          <Route path="/login" element={<Login />} />
-          <Route path="/register" element={<Register />} />
-          <Route path="/recipes" element={<Recipes />} />
-          <Route
-            path="/add-recipe"
-            element={
-              <PrivateRoute>
-                <AddRecipe />
-              </PrivateRoute>
-            } />
+        <Route path="/login" element={<Login />} />
+        <Route path="/register" element={<Register />} />
+        <Route
+          path="/recipes"
+          element={
+            <PrivateRoute>
+              <Recipes />
+            </PrivateRoute>
+          }
+        />
+        <Route
+          path="/add-recipe"
+          element={
+            <PrivateRoute>
+              <AddRecipe />
+            </PrivateRoute>
+          }
+        />
         </Routes>
       </div>
     </Router>

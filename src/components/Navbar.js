@@ -1,33 +1,50 @@
-import React from 'react';
+import React, { useContext } from 'react';
 import { Link } from 'react-router-dom';
+import { AuthContext } from '../context/AuthContext';
 
 const Navbar = () => {
+  const { isAuthenticated, logout } = useContext(AuthContext);
+
   return (
     <nav className="navbar navbar-expand-lg navbar-light bg-light">
       <div className="container">
-        <Link className="navbar-brand" to="/">Recipe App</Link>
-        <button
-          className="navbar-toggler"
-          type="button"
-          data-bs-toggle="collapse"
-          data-bs-target="#navbarNav"
-        >
-          <span className="navbar-toggler-icon"></span>
-        </button>
-        <div className="collapse navbar-collapse" id="navbarNav">
+        <Link className="navbar-brand" to="/">
+          Recipe App
+        </Link>
+        <div className="collapse navbar-collapse">
           <ul className="navbar-nav ms-auto">
-            <li className="nav-item">
-              <Link className="nav-link" to="/login">Login</Link>
-            </li>
-            <li className="nav-item">
-              <Link className="nav-link" to="/register">Register</Link>
-            </li>
-            <li className="nav-item">
-              <Link className="nav-link" to="/recipes">Recipes</Link>
-            </li>
-            <li className="nav-item">
-              <Link className="nav-link" to="/add-recipe">Add Recipe</Link>
-            </li>
+            {!isAuthenticated ? (
+              <>
+                <li className="nav-item">
+                  <Link className="nav-link" to="/login">
+                    Login
+                  </Link>
+                </li>
+                <li className="nav-item">
+                  <Link className="nav-link" to="/register">
+                    Register
+                  </Link>
+                </li>
+              </>
+            ) : (
+              <>
+                <li className="nav-item">
+                  <Link className="nav-link" to="/add-recipe">
+                    Add Recipe
+                  </Link>
+                </li>
+                <li className="nav-item">
+                  <Link className="nav-link" to="/recipe">
+                    Recipe
+                  </Link>
+                </li>
+                <li className="nav-item">
+                  <button className="btn btn-link nav-link" onClick={logout}>
+                    Logout
+                  </button>
+                </li>
+              </>
+            )}
           </ul>
         </div>
       </div>

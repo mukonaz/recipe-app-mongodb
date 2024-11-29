@@ -7,12 +7,12 @@ const AuthProvider = ({ children }) => {
 
   useEffect(() => {
     const token = localStorage.getItem('token');
-    setIsAuthenticated(!!token); // Check if token exists
+    setIsAuthenticated(!!token); // Check if a token exists
   }, []);
 
   const logout = () => {
-    localStorage.removeItem('token');
-    setIsAuthenticated(false);
+    localStorage.removeItem('token'); // Remove token
+    setIsAuthenticated(false); // Update authentication status
   };
 
   return (
