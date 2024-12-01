@@ -8,9 +8,13 @@ const AddRecipe = () => {
   const [ingredients, setIngredients] = useState('');
   const [instructions, setInstructions] = useState('');
   const [category, setCategory] = useState('');
+  const [prepTime, setPrepTime] = useState('');
+  const [cookTime, setCookTime] = useState('');
+  const [servings, setServings] = useState('');
+  const [picture, setPicture] = useState('');
 
   const handleSubmit = async (e) => {
-    e.preventDefault(); 
+    e.preventDefault();
     const token = localStorage.getItem('token');
     try {
       const res = await axios.post(
@@ -20,6 +24,10 @@ const AddRecipe = () => {
           ingredients: ingredients.split(','),
           instructions,
           category,
+          prepTime,
+          cookTime,
+          servings,
+          picture,
         },
         { headers: { Authorization: `Bearer ${token}` } }
       );
@@ -29,7 +37,7 @@ const AddRecipe = () => {
       alert('Failed to add recipe.');
     }
   };
-  
+
 
   return (
     <div className="col-md-6 mx-auto">
@@ -73,6 +81,40 @@ const AddRecipe = () => {
             onChange={(e) => setCategory(e.target.value)}
             required
           />
+        </div>
+        <div className="mb-3">
+          <label>Preparation Time</label>
+          <input
+            type="text"
+            className="form-control"
+            value={category}
+            onChange={(e) => setPrepTime(e.target.value)}
+            required
+          />
+        </div>
+        <div className="mb-3">
+          <label>Cooking Time</label>
+          <input
+            type="text"
+            className="form-control"
+            value={category}
+            onChange={(e) => setCookTime(e.target.value)}
+            required
+          />
+        </div>
+        <div className="mb-3">
+          <label>Servings</label>
+          <input
+            type="text"
+            className="form-control"
+            value={category}
+            onChange={(e) => setServings(e.target.value)}
+            required
+          />
+        </div>
+        <div class="mb-3">
+          <label for="formFile" class="form-label">Image</label>
+          <input class="form-control" type="file" id="formFile" />
         </div>
         <button type="submit" className="btn btn-primary">Add Recipe</button>
       </form>
