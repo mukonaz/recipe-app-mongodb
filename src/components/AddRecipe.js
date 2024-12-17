@@ -87,7 +87,7 @@ const AddRecipe = () => {
           <input
             type="text"
             className="form-control"
-            value={category}
+            value={prepTime}
             onChange={(e) => setPrepTime(e.target.value)}
             required
           />
@@ -97,7 +97,7 @@ const AddRecipe = () => {
           <input
             type="text"
             className="form-control"
-            value={category}
+            value={cookTime}
             onChange={(e) => setCookTime(e.target.value)}
             required
           />
@@ -107,7 +107,7 @@ const AddRecipe = () => {
           <input
             type="text"
             className="form-control"
-            value={category}
+            value={servings}
             onChange={(e) => setServings(e.target.value)}
             required
           />
