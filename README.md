@@ -137,14 +137,3 @@ Add Pagination: Paginate recipes for better performance.
 Add Search/Filter: Allow users to search for recipes by title or category.
 Screenshots
 Reminder: Add screenshots of the app (e.g., login page, recipes page, edit modal).
-
-Contributing
-If you'd like to contribute:
-
-Fork this repository.
-Create a new branch.
-Submit a pull request.
-License
-This project is licensed under the MIT License.
-
-Let me know if you need further assistance with the implementation or clarification! 😊
